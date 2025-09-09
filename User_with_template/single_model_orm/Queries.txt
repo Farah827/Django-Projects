@@ -1,0 +1,38 @@
+>>> from users_app.models import *
+
+>>> User.objects.create(first_name="Mohammad",last_name="essa", email = "mohammadessa@gmail.com", age = 20)
+<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >
+>>> User.objects.create(first_name="Farah",last_name=" abutaha", email = "farahtaha17@gmail.com", age = 17)
+<User:  name is Farah abutaha, his email is farahtaha17@gmail.com,age=17 >
+>>> User.objects.create(first_name="Qasem",last_name=" AbuLaila", email = "QasemAbulaila@gmail.com", age = 18)
+<User:  name is Qasem AbuLaila, his email is QasemAbulaila@gmail.com,age=18 >
+
+>>> User.objects.all()
+<QuerySet [<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >, <User:  name is Farah abutaha, his email is farahtaha17@gmail.com,age=17 >, <User:  name is Qasem AbuLaila, his email is QasemAbulaila@gmail.com,age=18 >]>
+
+>>> User.objects.last()
+<User:  name is Qasem AbuLaila, his email is QasemAbulaila@gmail.com,age=18 >
+
+>>> User.objects.first()
+<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >
+
+>>> user3 = User.objects.get(id=3)
+>>> user3.last_name="Pancakes"
+>>> user3.save()
+>>> User.objects.all()
+<QuerySet [<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >, <User:  name is Farah abutaha, his email is farahtaha17@gmail.com,age=17 >, <User:  name is QasemPancakes, his email is QasemAbulaila@gmail.com,age=18 >]>
+>>>
+
+>>> user2 = User.objects.get(id=2)
+>>> user2.delete()
+(1, {'users_app.User': 1})
+>>> User.objects.all()
+<QuerySet [<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >, <User:  name is QasemPancakes, his email is QasemAbulaila@gmail.com,age=18 >]>
+>>>
+
+>>> User.objects.all().order_by("first_name")
+<QuerySet [<User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >, <User:  name is QasemPancakes, his email is QasemAbulaila@gmail.com,age=18 >]>
+>>>
+>>> User.objects.all().order_by("-first_name")
+<QuerySet [<User:  name is QasemPancakes, his email is QasemAbulaila@gmail.com,age=18 >, <User:  name is Mohammadessa, his email is mohammadessa@gmail.com,age=20 >]>
+>>>

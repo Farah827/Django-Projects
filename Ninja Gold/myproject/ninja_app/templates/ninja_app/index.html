@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Game</title>
+    <style>
+        .container{
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            gap: 20px;
+            margin: 10px;
+        }
+        .location{
+            width: 200px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+        .log{
+            border: 1px solid black;
+            padding: 10px;
+            width: 500px;
+            height: 300px;
+            overflow: scroll;
+            margin: 0 auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <label>Your Gold: </label>
+        <label>{{ gold }}</label>
+    </header>
+
+    <div class="container">
+        <div class="location">
+            <h3>Cave</h3>
+            <p>earns 10-20</p>
+            <form action="process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="cave">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location">
+            <h3>House</h3>
+            <p>earns 10-20</p>
+            <form action="process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="house">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location">
+            <h3>Farm</h3>
+            <p>earns 10-20</p>
+            <form action="process_money" method="POST"> 
+                {% csrf_token %}
+                <input type="hidden" name="location" value="farm">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location">
+            <h3>Quest</h3>
+            <p>earns/loses 0-50</p>
+            <form action="process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="quest">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="log">
+        <h1>Activities</h1>
+        {% for activity in request.session.activities %}
+            <p>{{ activity }}</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

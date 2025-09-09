@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great number game</title>
+</head>
+<body>
+    <div class="container">
+
+            <h1>Guess the Number</h1>
+            <div class="message">{{message}}</div>
+            <p> Attempts : {{attempts}}</p>
+        {% if not game_over%}
+        <form action="guess" method="POST">
+            {% csrf_token%}
+            <input type="number" name="guess" required>
+            <button>Guess</button>
+
+        </form>
+       
+
+        {% else%}
+            {% if 'win' in message %}
+        <form action="winners" method="POST">
+            {% csrf_token %}
+            <label>Enter Your Name:</label>
+            <input type="text" name="winnerName">
+            <button>Save</button>
+        </form>
+            {% endif %}
+        <a href="reset">Play Again</a>
+    </div>
+     {% endif %}
+   
+    
+</body>
+</html>

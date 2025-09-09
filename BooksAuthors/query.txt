@@ -1,0 +1,86 @@
+>>> from book_author_app.models import *
+>>> Book.objects.create(title='C Sharp',desc='C Sharp book')
+<Book: Book Title: C Sharp>
+>>> Book.objects.create(title='Java',desc='Java book')
+<Book: Book Title: Java>
+>>> Book.objects.create(title='Python',desc='python book')
+<Book: Book Title: Python>
+>>> Book.objects.create(title='PHP',desc='php book')
+<Book: Book Title: PHP>
+>>> Book.objects.create(title='Ruby',desc='ruby book')
+<Book: Book Title: Ruby>
+
+>>> Author.objects.create(first_name='Jane',last_name='Austen')
+<Author: Author Name:Jane Austen>
+>>> Author.objects.create(first_name='Emily',last_name='Dickinson')
+<Author: Author Name:Emily Dickinson>
+>>> Author.objects.create(first_name='Fyodor',last_name='Destoevsky')
+<Author: Author Name:Fyodor Destoevsky>
+>>> Author.objects.create(first_name='William',last_name='Shakespeare')
+<Author: Author Name:William Shakespeare>
+>>> Author.objects.create(first_name='Lau',last_name='Tzu')
+<Author: Author Name:Lau Tzu>
+
+>>> cBook=Book.objects.get(id=1)
+>>> cBook.title='C#'
+>>> cBook.save()
+
+>>> a=Author.objects.get(id=4)
+>>> a.first_name='Bill'
+>>> a.save()
+
+>>> author=Author.objects.first()
+>>> book1=Book.objects.first()
+>>> book2=Book.objects.get(id=2)
+>>> author.books.add(book1)
+>>> author.books.add(book2)
+
+>>> author.books.all()
+<QuerySet [<Book: Book Title: C#>, <Book: Book Title: Java>]>
+
+>>> author2=Author.objects.get(id=2)
+>>> threeBooks=Book.objects.all()[:3]
+>>> author2.books.add(*threeBooks)
+>>> author2.books.all()
+<QuerySet [<Book: Book Title: C#>, <Book: Book Title: Java>, <Book: Book Title: Python>]>
+
+>>> author3=Author.objects.get(id=3)
+>>> book=Book.objects.all()[:4]
+>>> author.books.add(*book)
+>>> author.books.all()
+<QuerySet [<Book: Book Title: C#>, <Book: Book Title: Java>, <Book: Book Title: Python>, <Book: Book Title: PHP>]>
+
+
+>>> author4=Author.objects.get(id=5)
+>>> book=Book.objects.all()
+>>> author4.books.add(*book)
+>>> author4.books.all()
+<QuerySet [<Book: Book Title: C#>, <Book: Book Title: Java>, <Book: Book Title: Python>, <Book: Book Title: PHP>, <Book: Book Title: Ruby>]>
+>>> 
+
+>>> book3=Book.objects.get(id=3)
+>>> book3.authors.all()
+<QuerySet [<Author: Author Name:Emily Dickinson>, <Author: Author Name:Jane Austen>, <Author: Author Name:Lau Tzu>]>
+
+>>> book3 = Book.objects.get(id=3)
+>>> author1= book3.authors.first()
+>>> book3.authors.remove(author1)
+>>> book3.authors.all()
+<QuerySet [<Author: Author Name:Emily Dickinson>, <Author: Author Name:Lau Tzu>]>
+>>> 
+
+>>> book2=Book.objects.get(id=2)
+>>> author5=Author.objects.last()
+>>> book2.authors.add(author5)
+>>> book2.authors.all()
+<QuerySet [<Author: Author Name:Jane Austen>, <Author: Author Name:Emily Dickinson>, <Author: Author Name:Lau Tzu>]>
+>>> 
+
+>>> author3=Author.objects.get(id=3)
+>>> author3.books.all()
+
+
+>>> book5=Book.objects.last()
+>>> book5.authors.all()
+<QuerySet [<Author: Author Name:Lau Tzu>]>
+>>> 
