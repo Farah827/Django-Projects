@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login and register</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: space-evenly;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="registar">
+            <h2>Registration</h2>
+            <form action="{%url 'register' %}" method="POST">
+                {% csrf_token %}
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" required><br>
+
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" required><br>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" required><br>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" required><br>
+
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" name="confirm_password" required><br>
+
+                <label for="birthday">Date of birth</label>
+                <input type="date" name="birthday" required><br>
+
+                <button>Regiter</button>
+            </form>
+        </div>
+
+        <div class="login">
+            <h2>Login form</h2>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <label for="email">Email</label>
+                <input type="email" name="email" required><br>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" required><br>
+
+                <button>Login</button>
+            </form>
+        </div>
+
+        <div>
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{message}}</li>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>
